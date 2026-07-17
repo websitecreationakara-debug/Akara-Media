@@ -7,12 +7,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex min-h-screen bg-slate-100 text-slate-900">
       <aside className="fixed inset-y-0 left-0 flex w-56 flex-col bg-slate-900 p-4 max-md:hidden">
-        <div className="mb-6 px-3">
-          <div className="rounded-lg bg-white p-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Akara Media" className="h-8 w-auto" />
-          </div>
-          <div className="mt-2 text-xs text-slate-400">Point of Sale</div>
+        <div className="mb-6 px-3 text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-mark.png" alt="Akara Media" className="mx-auto h-24 w-24" />
+          <div className="mt-1 text-xs text-slate-400">Point of Sale</div>
         </div>
         <Nav />
         <form action={logout} className="mt-auto">
