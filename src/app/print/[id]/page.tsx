@@ -31,7 +31,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
         <PrintButton />
       </div>
 
-      <div className="mx-auto max-w-3xl bg-white p-10 shadow-lg print:max-w-none print:p-0 print:shadow-none">
+      <div className="mx-auto max-w-3xl bg-white p-10 text-slate-900 shadow-lg print:max-w-none print:p-0 print:shadow-none">
         <header className="flex items-start justify-between border-b-4 border-[#2cc9bd] pb-6">
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
