@@ -15,6 +15,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
 export const PRICE_TYPES: Record<string, string> = {
   FIXED: "Fixed price",
   FROM: "Starting from",
+  PER_HOUR: "Per hour",
   PER_MONTH: "Per month",
   PER_ITEM: "Per item",
 };
@@ -22,6 +23,7 @@ export const PRICE_TYPES: Record<string, string> = {
 export const PRICE_SUFFIX: Record<string, string> = {
   FIXED: "",
   FROM: "+",
+  PER_HOUR: "/hr",
   PER_MONTH: "/mo",
   PER_ITEM: "/item",
 };

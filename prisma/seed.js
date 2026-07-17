@@ -10,6 +10,7 @@ const services = [
   { category: "WEBSITE", name: "Website Redesign", price: 350, priceType: "FROM", description: "Modernize an existing website. Price depends on size and condition of current site." },
   { category: "WEBSITE", name: "Website Maintenance", price: 39, priceType: "PER_MONTH", unitLabel: "per month", description: "Updates, backups, security, small content changes (up to 2 hours/month)." },
   { category: "WEBSITE", name: "Domain + Hosting Setup", price: 80, priceType: "FIXED", description: "Domain registration and hosting setup for the first year, including business email." },
+  { category: "WEBSITE", name: "Website Work (hourly)", price: 5, priceType: "PER_HOUR", unitLabel: "per hour", description: "Updates, fixes, and small changes billed by the hour. Set Qty = number of hours." },
 
   // ---------- MEDIA ----------
   { category: "MEDIA", name: "Logo Design", price: 99, priceType: "FIXED", description: "3 concepts, 2 revision rounds, final files in all formats (PNG, SVG, PDF)." },
@@ -23,6 +24,7 @@ const services = [
   { category: "MEDIA", name: "Promotional Video (30–60 seconds)", price: 350, priceType: "FROM", description: "Scripted promo/ad video: shooting, editing, music, captions." },
   { category: "MEDIA", name: "Video Editing Only", price: 60, priceType: "FROM", unitLabel: "per video", description: "Editing of client-provided footage. Price depends on length and complexity." },
   { category: "MEDIA", name: "Drone Footage Add-on", price: 100, priceType: "FIXED", description: "Aerial shots added to any photo/video package." },
+  { category: "MEDIA", name: "Design / Editing Work (hourly)", price: 5, priceType: "PER_HOUR", unitLabel: "per hour", description: "Graphic design, photo editing, or video editing billed by the hour. Set Qty = number of hours." },
 
   // ---------- MARKETING ----------
   { category: "MARKETING", name: "Social Media Management (1 platform)", price: 180, priceType: "PER_MONTH", unitLabel: "per month", description: "12 posts/month, captions, scheduling, comment/DM monitoring for one platform." },
@@ -32,6 +34,7 @@ const services = [
   { category: "MARKETING", name: "SEO Starter", price: 200, priceType: "PER_MONTH", unitLabel: "per month", description: "Keyword research, on-page optimization, Google Business Profile, monthly report." },
   { category: "MARKETING", name: "Google Ads Management", price: 150, priceType: "PER_MONTH", unitLabel: "per month", description: "Search ads setup and optimization. Ad budget paid by client separately." },
   { category: "MARKETING", name: "Full Digital Marketing Package", price: 500, priceType: "PER_MONTH", unitLabel: "per month", description: "Social media (2 platforms) + ads management + monthly content shoot + reporting." },
+  { category: "MARKETING", name: "Marketing Support (hourly)", price: 5, priceType: "PER_HOUR", unitLabel: "per hour", description: "Consulting, ad setup, or content help billed by the hour. Set Qty = number of hours." },
 ];
 
 async function main() {
