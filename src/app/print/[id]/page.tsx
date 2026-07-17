@@ -34,7 +34,9 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
       <div className="mx-auto max-w-3xl bg-white p-10 shadow-lg print:max-w-none print:p-0 print:shadow-none">
         <header className="flex items-start justify-between border-b-2 border-slate-900 pb-6">
           <div>
-            <div className="text-2xl font-bold">{settings?.businessName || "Akara Media"}</div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt={settings?.businessName || "Akara Media"} className="mb-2 h-10 w-auto" />
+            <div className="text-lg font-bold">{settings?.businessName || "Akara Media"}</div>
             {settings?.tagline && <div className="text-sm text-slate-500">{settings.tagline}</div>}
             <div className="mt-2 space-y-0.5 text-xs text-slate-500">
               {settings?.address && <div>{settings.address}</div>}

@@ -13,8 +13,9 @@ export default async function LoginPage({
     <div className="flex min-h-screen items-center justify-center bg-slate-900 p-4">
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
         <div className="mb-6 text-center">
-          <div className="text-2xl font-bold text-slate-900">Akara Media</div>
-          <div className="mt-1 text-sm text-slate-500">Web · Media · Marketing — POS</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Akara Media" className="mx-auto mb-3 h-12 w-auto" />
+          <div className="text-sm text-slate-500">Web · Media · Marketing — POS</div>
         </div>
         <form action={login} className="space-y-4">
           <div>

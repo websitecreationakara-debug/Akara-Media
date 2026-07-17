@@ -8,8 +8,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="flex min-h-screen bg-slate-100 text-slate-900">
       <aside className="fixed inset-y-0 left-0 flex w-56 flex-col bg-slate-900 p-4 max-md:hidden">
         <div className="mb-6 px-3">
-          <div className="text-lg font-bold text-white">Akara Media</div>
-          <div className="text-xs text-slate-400">Point of Sale</div>
+          <div className="rounded-lg bg-white p-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Akara Media" className="h-8 w-auto" />
+          </div>
+          <div className="mt-2 text-xs text-slate-400">Point of Sale</div>
         </div>
         <Nav />
         <form action={logout} className="mt-auto">
