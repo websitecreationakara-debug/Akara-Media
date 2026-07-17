@@ -32,12 +32,12 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
       </div>
 
       <div className="mx-auto max-w-3xl bg-white p-10 shadow-lg print:max-w-none print:p-0 print:shadow-none">
-        <header className="flex items-start justify-between border-b-2 border-slate-900 pb-6">
+        <header className="flex items-start justify-between border-b-4 border-[#2cc9bd] pb-6">
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt={settings?.businessName || "Akara Media"} className="mb-2 h-10 w-auto" />
+            <img src="/logo.png" alt={settings?.businessName || "Akara Media"} className="mb-3 h-14 w-auto" />
             <div className="text-lg font-bold">{settings?.businessName || "Akara Media"}</div>
-            {settings?.tagline && <div className="text-sm text-slate-500">{settings.tagline}</div>}
+            {settings?.tagline && <div className="text-sm text-[#0d9488]">{settings.tagline}</div>}
             <div className="mt-2 space-y-0.5 text-xs text-slate-500">
               {settings?.address && <div>{settings.address}</div>}
               {settings?.phone && <div>Tel: {settings.phone}</div>}
@@ -45,7 +45,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold tracking-wide text-slate-800">{title}</div>
+            <div className="text-3xl font-bold tracking-wide text-[#0d9488]">{title}</div>
             <div className="mt-2 text-sm font-semibold">{doc.number}</div>
             <div className="text-xs text-slate-500">Date: {fmtDate(doc.issueDate)}</div>
             {doc.dueDate && (
@@ -57,7 +57,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
         </header>
 
         <section className="mt-6">
-          <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <div className="text-xs font-semibold uppercase tracking-wide text-[#0d9488]">
             {isInvoice ? "Bill to" : "Prepared for"}
           </div>
           <div className="mt-1 font-semibold">{doc.client.name}</div>
@@ -69,23 +69,23 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
 
         <table className="mt-8 w-full text-sm">
           <thead>
-            <tr className="border-b-2 border-slate-300 text-left text-xs uppercase tracking-wide text-slate-500">
-              <th className="py-2 pr-2">Description</th>
-              <th className="w-14 px-2 py-2 text-right">Qty</th>
-              <th className="w-28 px-2 py-2 text-right">Unit Price</th>
-              <th className="w-28 py-2 pl-2 text-right">Amount</th>
+            <tr className="print-exact bg-[#0d9488] text-left text-xs uppercase tracking-wide text-white">
+              <th className="rounded-l px-3 py-2.5">Description</th>
+              <th className="w-14 px-2 py-2.5 text-right">Qty</th>
+              <th className="w-28 px-2 py-2.5 text-right">Unit Price</th>
+              <th className="w-28 rounded-r px-3 py-2.5 text-right">Amount</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {doc.items.map((i) => (
               <tr key={i.id}>
-                <td className="py-2.5 pr-2">
+                <td className="px-3 py-2.5">
                   <div className="font-medium">{i.name}</div>
                   {i.detail && <div className="text-xs text-slate-500">{i.detail}</div>}
                 </td>
                 <td className="px-2 py-2.5 text-right align-top">{i.qty}</td>
                 <td className="px-2 py-2.5 text-right align-top">{money(i.unitPrice)}</td>
-                <td className="py-2.5 pl-2 text-right align-top font-medium">{money(i.qty * i.unitPrice)}</td>
+                <td className="px-3 py-2.5 text-right align-top font-medium">{money(i.qty * i.unitPrice)}</td>
               </tr>
             ))}
           </tbody>
@@ -103,17 +103,17 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
                 <span>−{money(doc.discount)}</span>
               </div>
             )}
-            <div className="flex justify-between border-t-2 border-slate-900 pt-1 text-base font-bold">
+            <div className="print-exact mt-1 flex justify-between rounded bg-[#e6faf8] px-3 py-2 text-base font-bold text-[#0d9488]">
               <span>Total</span>
               <span>{money(t.total)}</span>
             </div>
             {isInvoice && doc.payments.length > 0 && (
               <>
-                <div className="flex justify-between text-green-700">
+                <div className="flex justify-between px-3 text-green-700">
                   <span>Paid</span>
                   <span>−{money(t.paid)}</span>
                 </div>
-                <div className="flex justify-between font-bold">
+                <div className="flex justify-between px-3 font-bold text-[#0d9488]">
                   <span>Balance Due</span>
                   <span>{money(t.balance)}</span>
                 </div>
@@ -124,7 +124,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
 
         {isInvoice && doc.payments.length > 0 && (
           <section className="mt-6 text-xs text-slate-500">
-            <div className="font-semibold uppercase tracking-wide text-slate-400">Payment history</div>
+            <div className="font-semibold uppercase tracking-wide text-[#0d9488]">Payment history</div>
             <ul className="mt-1 space-y-0.5">
               {doc.payments.map((p) => (
                 <li key={p.id}>
@@ -140,13 +140,13 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
           <footer className="mt-8 space-y-3 border-t border-slate-200 pt-4 text-xs text-slate-600">
             {isInvoice && settings?.paymentInfo && (
               <div>
-                <div className="font-semibold uppercase tracking-wide text-slate-400">How to pay</div>
+                <div className="font-semibold uppercase tracking-wide text-[#0d9488]">How to pay</div>
                 <div className="mt-1 whitespace-pre-line">{settings.paymentInfo}</div>
               </div>
             )}
             {doc.notes && (
               <div>
-                <div className="font-semibold uppercase tracking-wide text-slate-400">Notes</div>
+                <div className="font-semibold uppercase tracking-wide text-[#0d9488]">Notes</div>
                 <div className="mt-1 whitespace-pre-line">{doc.notes}</div>
               </div>
             )}
