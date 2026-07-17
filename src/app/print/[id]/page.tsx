@@ -36,7 +36,6 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt={settings?.businessName || "Akara Media"} className="mb-3 h-14 w-auto" />
-            <div className="text-lg font-bold">{settings?.businessName || "Akara Media"}</div>
             {settings?.tagline && <div className="text-sm text-[#0d9488]">{settings.tagline}</div>}
             <div className="mt-2 space-y-0.5 text-xs text-slate-500">
               {settings?.address && <div>{settings.address}</div>}
