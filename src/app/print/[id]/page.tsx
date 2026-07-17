@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth";
 import { docTotals } from "@/lib/docs";
-import { money, fmtDate, PAYMENT_METHODS } from "@/lib/format";
+import { money, fmtDate, unitSuffix, PAYMENT_METHODS } from "@/lib/format";
 import PrintButton from "@/components/PrintButton";
 
 export default async function PrintPage({ params }: { params: Promise<{ id: string }> }) {
@@ -70,7 +70,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
           <thead>
             <tr className="print-exact bg-[#0d9488] text-left text-xs uppercase tracking-wide text-white">
               <th className="rounded-l px-3 py-2.5">Description</th>
-              <th className="w-14 px-2 py-2.5 text-right">Qty</th>
+              <th className="w-20 px-2 py-2.5 text-right">Qty / Time</th>
               <th className="w-28 px-2 py-2.5 text-right">Unit Price</th>
               <th className="w-28 rounded-r px-3 py-2.5 text-right">Amount</th>
             </tr>
@@ -82,7 +82,7 @@ export default async function PrintPage({ params }: { params: Promise<{ id: stri
                   <div className="font-medium">{i.name}</div>
                   {i.detail && <div className="text-xs text-slate-500">{i.detail}</div>}
                 </td>
-                <td className="px-2 py-2.5 text-right align-top">{i.qty}</td>
+                <td className="whitespace-nowrap px-2 py-2.5 text-right align-top">{i.qty}{unitSuffix(i.unit)}</td>
                 <td className="px-2 py-2.5 text-right align-top">{money(i.unitPrice)}</td>
                 <td className="px-3 py-2.5 text-right align-top font-medium">{money(i.qty * i.unitPrice)}</td>
               </tr>

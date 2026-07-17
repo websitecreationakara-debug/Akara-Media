@@ -51,6 +51,9 @@ export const STATUS_STYLES: Record<string, string> = {
   VOID: "bg-gray-200 text-gray-500",
 };
 
+export const unitSuffix = (unit: string) =>
+  unit === "hour" ? " hrs" : unit === "month" ? " mo" : "";
+
 export function fmtDate(d: Date | string | null | undefined): string {
   if (!d) return "—";
   const date = typeof d === "string" ? new Date(d) : d;

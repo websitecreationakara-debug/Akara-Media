@@ -30,7 +30,7 @@ export default async function EditQuotePage({ params }: { params: Promise<{ id: 
           dueDate: dateInputValue(doc.dueDate),
           discount: doc.discount,
           notes: doc.notes,
-          items: doc.items.map((i) => ({ name: i.name, detail: i.detail, qty: i.qty, unitPrice: i.unitPrice })),
+          items: doc.items.map((i) => ({ name: i.name, detail: i.detail, qty: i.qty, unit: i.unit, unitPrice: i.unitPrice })),
         }}
       />
     </div>

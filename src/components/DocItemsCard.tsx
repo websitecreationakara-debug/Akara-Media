@@ -1,9 +1,9 @@
 import { docTotals } from "@/lib/docs";
-import { money } from "@/lib/format";
+import { money, unitSuffix } from "@/lib/format";
 
 type Doc = {
   discount: number;
-  items: { id: number; name: string; detail: string; qty: number; unitPrice: number }[];
+  items: { id: number; name: string; detail: string; qty: number; unit: string; unitPrice: number }[];
   payments?: { amount: number }[];
 };
 
@@ -15,7 +15,7 @@ export default function DocItemsCard({ doc, showPaid }: { doc: Doc; showPaid?: b
         <thead>
           <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-400">
             <th className="py-2 pr-2">Item</th>
-            <th className="w-16 px-2 py-2 text-right">Qty</th>
+            <th className="w-20 px-2 py-2 text-right">Qty / Time</th>
             <th className="w-28 px-2 py-2 text-right">Unit price</th>
             <th className="w-28 py-2 pl-2 text-right">Amount</th>
           </tr>
@@ -27,7 +27,7 @@ export default function DocItemsCard({ doc, showPaid }: { doc: Doc; showPaid?: b
                 <div className="font-medium">{i.name}</div>
                 {i.detail && <div className="text-xs text-slate-500">{i.detail}</div>}
               </td>
-              <td className="px-2 py-2.5 text-right">{i.qty}</td>
+              <td className="whitespace-nowrap px-2 py-2.5 text-right">{i.qty}{unitSuffix(i.unit)}</td>
               <td className="px-2 py-2.5 text-right">{money(i.unitPrice)}</td>
               <td className="py-2.5 pl-2 text-right font-medium">{money(i.qty * i.unitPrice)}</td>
             </tr>

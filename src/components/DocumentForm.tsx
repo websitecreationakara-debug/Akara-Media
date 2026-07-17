@@ -17,7 +17,7 @@ type ServiceOpt = {
 
 type ClientOpt = { id: number; name: string; company: string };
 
-type Item = { key: number; name: string; detail: string; qty: number; unitPrice: number };
+type Item = { key: number; name: string; detail: string; qty: number; unit: string; unitPrice: number };
 
 type Props = {
   type: "QUOTE" | "INVOICE";
@@ -31,7 +31,7 @@ type Props = {
     dueDate: string;
     discount: number;
     notes: string;
-    items: { name: string; detail: string; qty: number; unitPrice: number }[];
+    items: { name: string; detail: string; qty: number; unit: string; unitPrice: number }[];
   };
 };
 
@@ -60,15 +60,16 @@ export default function DocumentForm({ type, clients, services, defaultClientId,
   function addService() {
     const s = services.find((x) => x.id === Number(pickerId));
     if (!s) return;
+    const unit = s.priceType === "PER_HOUR" ? "hour" : s.priceType === "PER_MONTH" ? "month" : "";
     setItems((prev) => [
       ...prev,
-      { key: keyCounter++, name: s.name, detail: s.description, qty: 1, unitPrice: s.price },
+      { key: keyCounter++, name: s.name, detail: s.description, qty: 1, unit, unitPrice: s.price },
     ]);
     setPickerId("");
   }
 
   function addCustom() {
-    setItems((prev) => [...prev, { key: keyCounter++, name: "", detail: "", qty: 1, unitPrice: 0 }]);
+    setItems((prev) => [...prev, { key: keyCounter++, name: "", detail: "", qty: 1, unit: "", unitPrice: 0 }]);
   }
 
   function update(key: number, patch: Partial<Item>) {
@@ -89,7 +90,7 @@ export default function DocumentForm({ type, clients, services, defaultClientId,
       dueDate,
       discount: discountNum,
       notes,
-      items: items.map(({ name, detail, qty, unitPrice }) => ({ name, detail, qty, unitPrice })),
+      items: items.map(({ name, detail, qty, unit, unitPrice }) => ({ name, detail, qty, unit, unitPrice })),
     };
     startTransition(async () => {
       const res = await saveDocument(payload);
@@ -166,7 +167,7 @@ export default function DocumentForm({ type, clients, services, defaultClientId,
               <thead>
                 <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-400">
                   <th className="py-2 pr-2">Item</th>
-                  <th className="w-20 px-2 py-2">Qty</th>
+                  <th className="w-32 px-2 py-2">Qty / Time</th>
                   <th className="w-32 px-2 py-2">Unit price</th>
                   <th className="w-28 px-2 py-2 text-right">Amount</th>
                   <th className="w-10 py-2"></th>
@@ -183,8 +184,15 @@ export default function DocumentForm({ type, clients, services, defaultClientId,
                         className={`${inputCls} mt-1 text-xs text-slate-500`} />
                     </td>
                     <td className="px-2 py-2">
-                      <input type="number" min="0" step="1" value={i.qty}
+                      <input type="number" min="0" step={i.unit === "hour" ? 0.5 : 1} value={i.qty}
+                        placeholder={i.unit === "hour" ? "hours" : ""}
                         onChange={(e) => update(i.key, { qty: parseFloat(e.target.value) || 0 })} className={inputCls} />
+                      <select value={i.unit} onChange={(e) => update(i.key, { unit: e.target.value })}
+                        className={`${inputCls} mt-1 text-xs text-slate-500`}>
+                        <option value="">pieces</option>
+                        <option value="hour">hours worked</option>
+                        <option value="month">months</option>
+                      </select>
                     </td>
                     <td className="px-2 py-2">
                       <input type="number" min="0" step="0.01" value={i.unitPrice}

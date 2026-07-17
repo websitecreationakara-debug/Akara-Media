@@ -66,6 +66,7 @@ model LineItem {
   name       String
   detail     String   @default("")
   qty        Float    @default(1)
+  unit       String   @default("") // "" = pieces, "hour", "month"
   unitPrice  Float
 }
 

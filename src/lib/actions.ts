@@ -117,7 +117,7 @@ export type DocPayload = {
   dueDate: string;
   discount: number;
   notes: string;
-  items: { name: string; detail: string; qty: number; unitPrice: number }[];
+  items: { name: string; detail: string; qty: number; unit: string; unitPrice: number }[];
 };
 
 export async function saveDocument(payload: DocPayload) {
@@ -128,6 +128,7 @@ export async function saveDocument(payload: DocPayload) {
       name: i.name.trim(),
       detail: i.detail.trim(),
       qty: Number.isFinite(i.qty) && i.qty > 0 ? i.qty : 1,
+      unit: ["hour", "month"].includes(i.unit) ? i.unit : "",
       unitPrice: Number.isFinite(i.unitPrice) ? i.unitPrice : 0,
     }));
   if (!payload.clientId || items.length === 0) {
@@ -203,6 +204,7 @@ export async function convertQuoteToInvoice(formData: FormData) {
           name: i.name,
           detail: i.detail,
           qty: i.qty,
+          unit: i.unit,
           unitPrice: i.unitPrice,
         })),
       },
