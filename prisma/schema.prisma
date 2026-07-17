@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Setting {
+  id           Int    @id @default(1)
+  businessName String @default("Akara Media")
+  tagline      String @default("Web · Media · Marketing")
+  phone        String @default("")
+  email        String @default("")
+  address      String @default("")
+  paymentInfo  String @default("")
+  invoiceNote  String @default("Thank you for your business!")
+  quoteNote    String @default("This quote is valid for 14 days.")
+}
+
+model Service {
+  id          Int     @id @default(autoincrement())
+  name        String
+  category    String // WEBSITE | MEDIA | MARKETING
+  description String  @default("")
+  price       Float
+  priceType   String  @default("FIXED") // FIXED | FROM | PER_MONTH | PER_ITEM
+  unitLabel   String  @default("")
+  active      Boolean @default(true)
+  sortOrder   Int     @default(0)
+}
+
+model Client {
+  id        Int        @id @default(autoincrement())
+  name      String
+  company   String     @default("")
+  phone     String     @default("")
+  email     String     @default("")
+  notes     String     @default("")
+  createdAt DateTime   @default(now())
+  documents Document[]
+}
+
+model Document {
+  id        Int        @id @default(autoincrement())
+  number    String     @unique
+  type      String // QUOTE | INVOICE
+  status    String     @default("DRAFT") // quotes: DRAFT|SENT|ACCEPTED|CONVERTED|DECLINED  invoices: UNPAID|PARTIAL|PAID|VOID
+  clientId  Int
+  client    Client     @relation(fields: [clientId], references: [id])
+  issueDate DateTime   @default(now())
+  dueDate   DateTime?
+  discount  Float      @default(0)
+  notes     String     @default("")
+  quoteId   Int?
+  createdAt DateTime   @default(now())
+  items     LineItem[]
+  payments  Payment[]
+}
+
+model LineItem {
+  id         Int      @id @default(autoincrement())
+  documentId Int
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  name       String
+  detail     String   @default("")
+  qty        Float    @default(1)
+  unitPrice  Float
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  documentId Int
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  amount     Float
+  method     String   @default("CASH") // CASH | ABA | WING | BANK | OTHER
+  reference  String   @default("")
+  note       String   @default("")
+  paidAt     DateTime @default(now())
+}
