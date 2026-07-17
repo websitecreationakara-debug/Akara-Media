@@ -43,6 +43,7 @@ export async function destroySession(): Promise<void> {
 }
 
 export async function isLoggedIn(): Promise<boolean> {
+  if (process.env.DISABLE_LOGIN === "1") return true;
   const store = await cookies();
   return verifySessionToken(store.get(SESSION_COOKIE)?.value);
 }

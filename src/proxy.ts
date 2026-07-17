@@ -19,6 +19,7 @@ function verify(token: string | undefined): boolean {
 }
 
 export function proxy(request: NextRequest) {
+  if (process.env.DISABLE_LOGIN === "1") return NextResponse.next();
   const { pathname } = request.nextUrl;
   if (pathname === "/login") return NextResponse.next();
   if (!verify(request.cookies.get(SESSION_COOKIE)?.value)) {
